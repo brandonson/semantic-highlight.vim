@@ -44,6 +44,7 @@ command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()
 command! SemanticHighlightToggle call s:toggleHighlight()
 command! RebuildSemanticColors call s:buildColors()
+command! RecreateSemanticColors call s:recreateColors()
 
 function! s:readCache() abort
 	if !filereadable(g:semanticPersistCacheLocation)
@@ -71,6 +72,14 @@ if g:semanticPersistCache && filereadable(g:semanticPersistCacheLocation)
 endif
 
 autocmd VimLeave * call s:persistCache()
+
+function! s:recreateColors()
+	call s:disableHighlight()
+	call delete(g:semanticPersistCache)
+        let s:cache = {}
+	let s:hasBuiltColors = 0
+	call s:semHighlight()
+endfunction
 
 function! s:persistCache()
 	let l:cacheList = []
