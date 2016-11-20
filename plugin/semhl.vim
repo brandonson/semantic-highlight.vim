@@ -112,7 +112,10 @@ function! s:semHighlight()
 	let b:cache_defined = {}
 
 	let buflen = line('$')
-	let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
+        let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
+        if &ft=='scheme' || &ft=='plai' || &ft=='racket'
+          let pattern = '\<[\$]*[a-zA-Z0-9\_][a-zA-Z0-9\_\-\*\?\/\>\<\=]*\>'
+        endif
 	let cur_color = 0
 	let colorLen = len(s:semanticColors)
 
