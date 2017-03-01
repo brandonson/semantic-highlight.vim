@@ -114,7 +114,8 @@ function! s:semHighlight()
 	let buflen = line('$')
         let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_]*\>'
         if &ft=='scheme' || &ft=='plai' || &ft=='racket' || &ft=='clojure'
-          let pattern = '\<[\$]*[a-zA-Z\_][a-zA-Z0-9\_\-\+\*\?\/\>\<\=\.\!]*\>'
+          let corepat = 'a-zA-Z\_\-\+\*\?\/\>\<\=\.\!'
+          let pattern = '\<[\$]*[' . corepat . '][0-9' . corepat . ']*\>'
         endif
 	let cur_color = 0
 	let colorLen = len(s:semanticColors)
